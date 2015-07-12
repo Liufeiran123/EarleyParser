@@ -1,0 +1,23 @@
+#-> NON TERMINAL -> NON TERMINAL | TERMINAL -> PROBABILITY OF PRODUCTION
+
+#S->NP VP->0
+#S->Aux NP VP->0
+S->VP->0
+NP->Det Nominal->0
+Nominal->Noun->0
+Nominal->Noun Nominal->0
+NP->Proper-Noun->0
+VP->Verb->0
+VP->Verb NP->0
+
+#->Det->"a"->0
+#->Det->"the"->0
+#->Noun->"plane"->0
+#->Noun->"dog"->0
+#->Noun->"cat"->0
+#->Noun->"policeman"->0
+#->Noun->"thief"->0
+#->Noun->"gun"->0
+#->Prep->"with"->0
+#->Verb->"shot"->0
+

@@ -1,0 +1,15 @@
+#->TERMINAL -> NON TERMINAL -> PROBABILITY OF TERMINAL
+
+a->Det
+the->Det
+that->Det
+plane->Noun
+dog->Noun
+cat->Noun
+flight->Noun
+policeman->Noun
+thief->Noun
+gun->Noun
+with->Prep
+shot->Verb
+book->Verb
