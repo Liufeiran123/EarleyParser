@@ -150,8 +150,9 @@ class EarleyParser:
                 stateToInsert = State(nonTerminalToExpand,pro,stateToExpand,positionInputString,0)
                 positionOfState = self.stateExists(positionInputString,stateToInsert)
                 if positionOfState < 0:
-                    self.__earleyParserChart[ positionInputString ].append( stateToInsert )
+                    self.__earleyParserChart[positionInputString].append( stateToInsert )
                 else:
+                    self.__earleyParserChart[positionInputString][positionOfState].getBacktraceStateVector().append( stateToExpand )
                     del stateToInsert
 
     def scanner(self,stateToScan,positionInputString):
@@ -181,13 +182,13 @@ class EarleyParser:
                 self.__earleyParserChart[ positionInputString ].append( stateToInsert )
 
     def stateExists(self,chartPosition,stateToCheck):
-        for states in self.__earleyParserChart[chartPosition]:
+        for index,states in enumerate(self.__earleyParserChart[chartPosition]):
             if states.getNonTerminal() == stateToCheck.getNonTerminal() and \
                 states.getInputStringProgress() == stateToCheck.getInputStringProgress() and \
                 id(states.getProduction()) == id(stateToCheck.getProduction()) and \
                 states.getProductionProgress() == stateToCheck.getProductionProgress():
                # print  "[DEBUG]: found same state at position " , it - this->earleyParserChart[ chartPosition ].begin() << " of chart[" << chartPosition << "]" << endl;
-                return 1
+                return index
         return -1
 
 

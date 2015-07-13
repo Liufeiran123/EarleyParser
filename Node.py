@@ -18,7 +18,25 @@ class Node:
             print  " ",  ab , " ",
         for pro in self.__productionstr[::-1]:
             if pro in earleyProductions:
-                nextStateToExpand = currentstateToExpand.getBacktraceState()
+                if len(currentstateToExpand.getBacktraceStateVector()) > 1:
+                    print ""
+                    print "BACKTRACE VECTOR BIGGER THAN 1"
+                    for btstates in currentstateToExpand.getBacktraceStateVector():
+                        print ""
+                        print "[DEBUG]: at 0 -" , btstates.getNonTerminal() , " size: " , len(btstates.getProduction().getProductionContent())
+                        for productions in btstates.getProduction().getProductionContent():
+                            print productions," "
+                        print ""
+                    for index,btstates in enumerate(currentstateToExpand.getBacktraceStateVector()):
+                        if id(self.__father.getProduction()) == id(btstates.getProduction()):
+                            currentstateToExpand = btstates
+                            print "[DEBUG]: matching production pointer at position " ,index
+                            break
+                        if index == len(currentstateToExpand.getBacktraceStateVector()) - 1:
+                            print"[ERROR]: no matching production pointer correspondent to production in this node!"
+                            exit(1)
+                else:
+                    nextStateToExpand = currentstateToExpand.getBacktraceStateVector()[0]
                 child = Node(self,nextStateToExpand.getNonTerminal(),nextStateToExpand.getProduction().getProductionContent(),\
                         nextStateToExpand.getProduction())
                 self.__children.insert(0,child)
@@ -28,8 +46,45 @@ class Node:
             else:
                 child = Node(self,pro,[],None)
                 self.__children.insert(0,child)
-                currentstateToExpand = currentstateToExpand.getBacktraceState()
-                currentstateToExpand = currentstateToExpand.getBacktraceState()
+                if len(currentstateToExpand.getBacktraceStateVector()) > 1:
+                    print ""
+                    print "BACKTRACE VECTOR BIGGER THAN 1"
+                    for btstates in currentstateToExpand.getBacktraceStateVector():
+                        print ""
+                        print "[DEBUG]: at 0 -" ,btstates.getNonTerminal() ," size: " ,len(btstates.getProduction().getProductionContent())
+                        for productions in btstates.getProduction().getProductionContent():
+                            print productions
+                        print ""
+                    for index,btstates in enumerate(currentstateToExpand.getBacktraceStateVector()):
+                        if id(self.__father.getProduction()) == id(btstates.getProduction()):
+                            currentstateToExpand = btstates
+                            print "[DEBUG]: matching production pointer at position " , index
+                            break;
+                        if index == len(currentstateToExpand.getBacktraceStateVector())-1:
+                            print "[ERROR]: no matching production pointer correspondent to production in this node!"
+                            exit(1)
+                else:
+                    currentstateToExpand = currentstateToExpand.getBacktraceStateVector()[0]
+
+                if len(currentstateToExpand.getBacktraceStateVector()) > 1:
+                    print ""
+                    print "BACKTRACE VECTOR BIGGER THAN 1"
+                    for btstates in currentstateToExpand.getBacktraceStateVector():
+                        print ""
+                        print "[DEBUG]: at 0 -" ,btstates.getNonTerminal() ," size: " ,len(btstates.getProduction().getProductionContent())
+                        for productions in btstates.getProduction().getProductionContent():
+                            print productions
+                        print ""
+                    for index,btstates in enumerate(currentstateToExpand.getBacktraceStateVector()):
+                        if id(self.__father.getProduction()) == id(btstates.getProduction()):
+                            currentstateToExpand = btstates
+                            print "[DEBUG]: matching production pointer at position " , index
+                            break;
+                        if index == len(currentstateToExpand.getBacktraceStateVector())-1:
+                            print "[ERROR]: no matching production pointer correspondent to production in this node!"
+                            exit(1)
+                else:
+                    currentstateToExpand = currentstateToExpand.getBacktraceStateVector()[0]
         return currentstateToExpand
 
     def printf(self):

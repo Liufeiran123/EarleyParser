@@ -6,13 +6,14 @@ class State:
     def __init__(self,nonTerminal,Production,backtraceState,inputStringProgress,productionProgress):
         self.__noTerminal = nonTerminal
         self.__Production = Production
-        self.__backtraceState = backtraceState
+        self.__backtraceStateVector=[]
+        self.__backtraceStateVector.append(backtraceState)
         self.__inputStringProgress = inputStringProgress
         self.__productionProgress = productionProgress
         self.__printed = False
 
-    def getBacktraceState(self):
-        return self.__backtraceState
+    def getBacktraceStateVector(self):
+        return self.__backtraceStateVector
     def getNonTerminal(self):
         return self.__noTerminal
     def getProduction(self):
